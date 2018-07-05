@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Language" content="en"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Canvas Experiments</title>
+        <link rel="stylesheet" href="css/master.css">
+        <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400|Poppins:300,400,700" rel="stylesheet">
+    </head>
+    <body>
+        <a href="/" class="logo">J</a>
+        <a href="https://github.com/jestov/canvas-experiments" class="github">
+          <i class="icon ion-social-github"></i>
+        </a>
+        <main>
+          <div class="container">
+            <h1>Canvas Experiments</h1>
+            <h2>Learning canvas with some experiments</h2>
+          </div>
+          <div class="content">
+              <!DOCTYPE html>
+              <html lang="en" dir="ltr">
+                <head>
+                  <meta charset="utf-8">
+                  <title></title>
+                  <style media="screen">
+                  body,html{
+                    padding: 0;
+                    margin: 0;
+                    height: 100%;
+                }
+                    canvas#canvas1{
+                      background: #f9f9f9;
+                      width: 50%;
+                      margin: 0;
+                    }
+                    canvas#canvas2{
+                        background: #f6f6f6;
+                        width: 50%;
+
+                    }
+                  </style>
+
+                </head>
+                <body>
+                    <canvas id="canvas2"></canvas>
+                    <canvas id="canvas1"></canvas>
+
+                  <script type="text/javascript">
+                  var canvas = document.getElementById('canvas2');
+                  canvas.width = window.innerWidth;
+                  canvas.height = window.innerHeight;
+
+                  var c = canvas.getContext('2d');
+
+
+                   c.fillStyle='#5ca485';
+                   c.fillRect(200,200,100,100);
+                   c.fillStyle='#5ca485';
+                   c.fillRect(300,300,300,300);
+
+
+                   // Line
+                   /*c.beginPath();
+                   c.moveTo(50,300);
+                   c.lineTo(300,100);
+                   c.lineTo(400,300);
+                   c.strokeStyle="blue";
+                   c.stroke();*/
+
+                   //Arc / Circle
+                   c.beginPath();
+                   c.arc(300,300,30,0,Math.PI * 2,false);
+                   c.strokeStyle="#5ca485";
+                   c.fillStyle="#5ca485";
+                   c.stroke();
+                   c.fill();
+
+
+
+                   for(var i=0;i < 10;i++){
+                     var x=Math.random() * window.innerWidth;
+                     var y=Math.random() * window.innerHeight;
+                     c.beginPath();
+                     /*c.arc(x,y,80,0,Math.PI * 2,false);
+                     c.strokeStyle="#222";
+                     c.stroke();*/
+                     c.fillStyle='rgba(26,30,40,0.8)';
+                     c.fillRect(x,y,100,100);
+                   }
+                  </script>
+                  <script type="text/javascript">
+                  var canvas = document.getElementById('canvas1');
+                  canvas.width = window.innerWidth;
+                  canvas.height = window.innerHeight;
+
+                  var c = canvas.getContext('2d');
+
+                  function Circle(x,y,dx,dy,radius){
+                    this.x = x;
+                    this.y = y;
+                    this.dx = dx;
+                    this.dy = dy;
+                    this.radius = radius;
+
+                    this.draw = function(){
+                      c.beginPath();
+                      c.arc(this.x,this.y,this.radius,0,Math.PI * 2,false);
+                      c.strokeStyle="green";
+                      c.stroke();
+                      c.fill();
+                      c.fillStyle=getRandomColor();
+                    }
+
+                    this.update = function(){
+                      if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
+                        this.dx= -this.dx;
+                      }
+                      if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
+                        this.dy= -this.dy;
+                      }
+                      this.x += this.dx;
+                      this.y += this.dy;
+
+                      this.draw();
+                    }
+                  }
+
+                  function getRandomColor() {
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                      color += letters[Math.floor(Math.random() * 12)];
+                    }
+                    return color;
+                  }
+
+                  var circleArray = [];
+
+                  for (var i = 0; i <= 100; i++) {
+                    var radius = 7;
+                    var x=Math.random() * (innerWidth - radius) ;
+                    var y=Math.random() * (innerHeight - radius) ;
+                    var dx=(Math.random() - 1);
+                    var dy=(Math.random() - 1);
+                    circleArray.push(new Circle(x,y,dx,dy,radius));
+                  }
+
+
+                  function animate(){
+                    requestAnimationFrame(animate);
+                    c.clearRect(0,0,innerWidth,innerHeight);
+
+                    for (var i = 0; i <= circleArray.length; i++) {
+                      circleArray[i].update();
+                    }
+                  }
+                  animate();
+
+                  </script>
+                </body>
+              </html>
+
+          </div>
+        </main>
+        <footer>
+          Made with <i class="icon ion-heart"></i> by <a href="https://github.com/jestov">jestov</a>
+        </footer>
+    </body>
+</html>
