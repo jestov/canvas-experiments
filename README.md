@@ -1,3 +1,3 @@
 # canvas-experiments
 
-Este es un repositorio para  compartir algunos experimentos en Canvas para aprenderlo, lo comparto por si te sirve. Esto es parte de un curso de https://www.chriscourses.com/
+This is a repository to share some experiments in Canvas to learn it, I share it in case it helps. This is part of a course at https://www.chriscourses.com/
